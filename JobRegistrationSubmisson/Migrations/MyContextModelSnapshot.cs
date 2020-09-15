@@ -59,15 +59,21 @@ namespace JobRegistrationSubmisson.Migrations
 
             modelBuilder.Entity("JobRegistrationSubmisson.Models.AccRoles", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Id");
+                    b.Property<string>("AccountsId");
 
                     b.Property<string>("RoleId");
 
                     b.Property<string>("RolesId");
 
-                    b.HasKey("UserId");
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountsId");
 
                     b.HasIndex("RolesId");
 
@@ -76,7 +82,8 @@ namespace JobRegistrationSubmisson.Migrations
 
             modelBuilder.Entity("JobRegistrationSubmisson.Models.Employees", b =>
                 {
-                    b.Property<string>("EmpId");
+                    b.Property<string>("EmpId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Adress");
 
@@ -111,22 +118,13 @@ namespace JobRegistrationSubmisson.Migrations
 
             modelBuilder.Entity("JobRegistrationSubmisson.Models.AccRoles", b =>
                 {
+                    b.HasOne("JobRegistrationSubmisson.Models.Accounts", "Accounts")
+                        .WithMany()
+                        .HasForeignKey("AccountsId");
+
                     b.HasOne("JobRegistrationSubmisson.Models.Roles", "Roles")
                         .WithMany()
                         .HasForeignKey("RolesId");
-
-                    b.HasOne("JobRegistrationSubmisson.Models.Accounts", "Accounts")
-                        .WithMany("AccRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("JobRegistrationSubmisson.Models.Employees", b =>
-                {
-                    b.HasOne("JobRegistrationSubmisson.Models.Accounts", "Accounts")
-                        .WithOne("Employees")
-                        .HasForeignKey("JobRegistrationSubmisson.Models.Employees", "EmpId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
