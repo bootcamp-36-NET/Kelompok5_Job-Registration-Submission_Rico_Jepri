@@ -20,9 +20,9 @@ namespace JobRegistrationSubmisson.Controllers
         }
 
         [HttpGet]
-        public List<Roles> GetAll()
+        public List<Role> GetAll()
         {
-            List<Roles> list = new List<Roles>();
+            List<Role> list = new List<Role>();
             foreach (var item in _context.Roles)
             {
                 list.Add(item);
@@ -31,17 +31,17 @@ namespace JobRegistrationSubmisson.Controllers
         }
 
         [HttpGet("{id}")]
-        public Roles GetID(int id)
+        public Role GetID(int id)
         {
             return _context.Roles.Find(id);
         }
 
         [HttpPost]
-        public IActionResult Create(Roles role)
+        public IActionResult Create(Role role)
         {
             if (ModelState.IsValid)
             {
-                var roles = new Roles() { Name = role.Name };
+                var roles = new Role() { Name = role.Name };
                 _context.Roles.AddAsync(roles);
                 _context.SaveChanges();
                 return Ok("Successfully Created");
@@ -51,7 +51,7 @@ namespace JobRegistrationSubmisson.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(string id, Roles role)
+        public IActionResult Update(string id, Role role)
         {
             if (ModelState.IsValid)
             {
