@@ -13,13 +13,13 @@ namespace JobRegistrationSubmisson.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public class JobSeekersController : ControllerBase
     {
         private readonly MyContext _context;
 
         public IConfiguration _configuration;
 
-        public EmployeesController(MyContext myContext, IConfiguration config)
+        public JobSeekersController(MyContext myContext, IConfiguration config)
         {
             _context = myContext;
             _configuration = config;
@@ -28,26 +28,27 @@ namespace JobRegistrationSubmisson.Controllers
         ///[Authorize]
         // GET api/values
         [HttpGet]
-        public async Task<List<EmployeeVM>> GetAll()
+        public async Task<List<JobSeekerVM>> GetAll()
         {
-            List<EmployeeVM> list = new List<EmployeeVM>();
+            List<JobSeekerVM> list = new List<JobSeekerVM>();
             //var user = new UserVM();
-            //var getData = await _context.Employees.Include("User").Where(Q => Q.isDelete == false).ToListAsync();
-            var getData = await _context.Employees.Include("User").ToListAsync();
+            var getData = await _context.jobSeekers.Include("User").Where(Q => Q.Reject == false).ToListAsync();
+            //var getData = await _context.jobSeekers.Include("User").ToListAsync();
             if (getData.Count == 0)
             {
                 return null;
             }
             foreach (var item in getData)
             {
-                var user = new EmployeeVM()
+                var user = new JobSeekerVM()
                 {
-                    EmpId = item.User.Id,
+                    JobSId = item.User.Id,
                     Username = item.User.UserName,
                     Email = item.User.Email,
                     Address = item.Address,
                     //Password = item.User.PasswordHash,
                     Phone = item.User.PhoneNumber,
+                    Joblist = item.Joblist.Name
                     //CreatedData = item.CreatedData,
                     //UpdatedData = item.UpdatedData
                     //RoleName = item.Role.Name,
@@ -70,16 +71,16 @@ namespace JobRegistrationSubmisson.Controllers
 
 
         [HttpGet("{id}")]
-        public EmployeeVM GetID(string id)
+        public JobSeekerVM GetID(string id)
         {
-            var getData = _context.Employees.Include("User").SingleOrDefault(x => x.EmpId == id);
+            var getData = _context.jobSeekers.Include("User").SingleOrDefault(x => x.JobSId == id);
             if (getData == null || getData.User == null)
             {
                 return null;
             }
-            var user = new EmployeeVM()
+            var user = new JobSeekerVM()
             {
-                EmpId = getData.User.Id,
+                JobSId = getData.User.Id,
                 Username = getData.User.UserName,
                 Email = getData.User.Email,
                 Address = getData.Address,
@@ -96,7 +97,7 @@ namespace JobRegistrationSubmisson.Controllers
         {
             if (ModelState.IsValid)
             {
-                var getId = _context.Employees.Include("User").SingleOrDefault(x => x.EmpId == id);
+                var getId = _context.jobSeekers.Include("User").SingleOrDefault(x => x.JobSId == id);
                 //var getId = _context.Users.Find(id);
                 var hasbcrypt = BCrypt.Net.BCrypt.HashPassword(userVM.Password, 12);
                 getId.User.Id = userVM.Id;
@@ -104,7 +105,7 @@ namespace JobRegistrationSubmisson.Controllers
                 getId.User.Email = userVM.Email;
                 getId.User.PasswordHash = hasbcrypt;
                 getId.User.PhoneNumber = userVM.Phone;
-                getId.UpdatedData = DateTimeOffset.Now;
+                getId.UpdateDate = DateTimeOffset.Now;
                 _context.SaveChanges();
                 return Ok("Successfully Update");
             }
@@ -118,13 +119,13 @@ namespace JobRegistrationSubmisson.Controllers
         {
             if (ModelState.IsValid)
             {
-                var getData = _context.Employees.Include("User").SingleOrDefault(x => x.EmpId == id);
+                var getData = _context.jobSeekers.Include("User").SingleOrDefault(x => x.JobSId == id);
                 if (getData == null)
                 {
                     return BadRequest("Not Succsessfully");
                 }
-                getData.DeletedData = DateTimeOffset.Now;
-                getData.isDelete = true;
+                getData.RejectDate = DateTimeOffset.Now;
+                getData.Reject = true;
 
                 _context.Entry(getData).State = EntityState.Modified;
                 _context.SaveChangesAsync();

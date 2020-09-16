@@ -8,6 +8,10 @@ namespace JobRegistrationSubmisson.ViewModel
     public class JobSeekerVM
     {
         public string JobSId { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Phone { get; set; }
         public string Address { get; set; }
         public DateTime Birth_Date { get; set; }
         public string Nationality { get; set; }
@@ -24,5 +28,6 @@ namespace JobRegistrationSubmisson.ViewModel
         public DateTimeOffset RejectDate { get; set; }
         public bool Approve { get; set; }
         public bool Reject { get; set; }
+        public string Joblist { get; set; }
     }
 }

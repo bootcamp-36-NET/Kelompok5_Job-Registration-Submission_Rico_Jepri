@@ -120,10 +120,11 @@ namespace JobRegistrationSubmisson.Controllers
                 mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 client.Send(mm);
 
-                userVM.RoleName = "JobSeeker";
+                userVM.RoleName = "HR";
                 var user = new User();
                 var roleuser = new UserRole();
                 var JobS = new JobSeeker();
+                var emp = new Employees();
                 var role = _context.Roles.Where(r => r.Name == userVM.RoleName).FirstOrDefault();
 
                 user.UserName = userVM.Username;
@@ -136,18 +137,28 @@ namespace JobRegistrationSubmisson.Controllers
                 user.LockoutEnabled = false;
                 user.AccessFailedCount = 0;
                 user.SecurityStamp = code;
+                _context.Users.AddAsync(user);
 
                 roleuser.Role = role;
                 roleuser.User = user;
-
-                JobS.JobSId = user.Id;
-                JobS.RegistDate = DateTimeOffset.Now;
-                JobS.Reject = false;
-                JobS.Approve = false;
-
                 _context.UserRole.AddAsync(roleuser);
-                _context.Users.AddAsync(user);
-                _context.jobSeekers.AddAsync(JobS);
+
+                if (userVM.RoleName == "HR")
+                {
+                    emp.EmpId = user.Id;
+                    emp.CreatedData = DateTimeOffset.Now;
+                    emp.isDelete = false;
+                    _context.Employees.AddAsync(emp);
+                }
+                else if(userVM.RoleName == "JobSeeker"){
+                    JobS.JobSId = user.Id;
+                    JobS.RegistDate = DateTimeOffset.Now;
+                    JobS.Reject = false;
+                    JobS.Approve = false;
+                    _context.jobSeekers.AddAsync(JobS);
+
+                }
+
                 _context.SaveChanges();
                 return Ok("Successfully Created");
             }
