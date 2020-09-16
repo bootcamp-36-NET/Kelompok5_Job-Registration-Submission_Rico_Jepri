@@ -120,7 +120,7 @@ namespace JobRegistrationSubmisson.Controllers
                 mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 client.Send(mm);
 
-                userVM.RoleName = "HR";
+                userVM.RoleName = "JobSeeker";
                 var user = new User();
                 var roleuser = new UserRole();
                 var JobS = new JobSeeker();
@@ -146,11 +146,12 @@ namespace JobRegistrationSubmisson.Controllers
                 if (userVM.RoleName == "HR")
                 {
                     emp.EmpId = user.Id;
-                    emp.CreatedData = DateTimeOffset.Now;
-                    emp.isDelete = false;
+                    emp.CreateTime = DateTimeOffset.Now;
+                    emp.IsDelete = false;
                     _context.Employees.AddAsync(emp);
                 }
-                else if(userVM.RoleName == "JobSeeker"){
+                else if (userVM.RoleName == "JobSeeker")
+                {
                     JobS.JobSId = user.Id;
                     JobS.RegistDate = DateTimeOffset.Now;
                     JobS.Reject = false;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using JobRegistrationSubmisson.Repositories.Interface;
+using JobRegistrationSubmisson.Repositories.Interfeces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +11,9 @@ namespace JobRegistrationSubmisson.Base
     [Route("api/[controller]")]
     [ApiController]
     public class BaseController<TEntity, TRepo> : ControllerBase
-        where TEntity : class
-        where TRepo : IRepo<TEntity>
+    where TEntity : class
+    where TRepo : IRepo<TEntity>
     {
-        //DepartmentsController.U
         IRepo<TEntity> _repo;
         public BaseController(TRepo repo)
         {
@@ -37,18 +36,6 @@ namespace JobRegistrationSubmisson.Base
             }
             return BadRequest("Something Wrong! Please check again");
         }
-
-        //[HttpPut("{id}")]
-        //public async Task<ActionResult<int>> Update(int id, TEntity entity)
-        //{
-
-        //    var data = await _repo.Update(entity);
-        //    if (data.Equals(null))
-        //    {
-        //        return BadRequest("Something Wrong! Please check again");
-        //    }
-        //    return data;
-        //}
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<int>> Delete(int Id)

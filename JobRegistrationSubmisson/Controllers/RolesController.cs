@@ -31,7 +31,7 @@ namespace JobRegistrationSubmisson.Controllers
         }
 
         [HttpGet("{id}")]
-        public Role GetID(int id)
+        public Role GetID(string id)
         {
             return _context.Roles.Find(id);
         }
@@ -56,6 +56,7 @@ namespace JobRegistrationSubmisson.Controllers
             if (ModelState.IsValid)
             {
                 var getId = _context.Roles.Find(id);
+                getId.Name = role.Name;
                 _context.SaveChanges();
                 return Ok("Successfully Update");
             }

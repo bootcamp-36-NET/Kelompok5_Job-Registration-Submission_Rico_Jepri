@@ -1,6 +1,6 @@
 ﻿using JobRegistrationSubmisson.Base;
 using JobRegistrationSubmisson.Context;
-using JobRegistrationSubmisson.Repositories.Interface;
+using JobRegistrationSubmisson.Repositories.Interfeces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 namespace JobRegistrationSubmisson.Repositories
 {
     public class GeneralRepo<TEntity, TContext> : IRepo<TEntity>
-    where TEntity : class, BaseModel
+    
+        where TEntity : class, BaseModel
         where TContext : MyContext
     {
         MyContext _context;

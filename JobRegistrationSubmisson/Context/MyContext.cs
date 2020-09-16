@@ -15,7 +15,6 @@ namespace JobRegistrationSubmisson.Context
         public DbSet<UserRole> UserRole { get; set; }
 
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<UserRole>().HasKey(sc => new { sc.UserId, sc.RoleId });
@@ -40,9 +39,9 @@ namespace JobRegistrationSubmisson.Context
 
             //base.OnModelCreating(modelBuilder);
         }
-
         public DbSet<Employees> Employees { get; set; }
         public DbSet<JobSeeker> jobSeekers { get; set; }
         public DbSet<Joblist> Joblists { get; set; }
+
     }
 }

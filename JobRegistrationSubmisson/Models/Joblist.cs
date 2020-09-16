@@ -1,5 +1,4 @@
 ﻿using JobRegistrationSubmisson.Base;
-using JobRegistrationSubmisson.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

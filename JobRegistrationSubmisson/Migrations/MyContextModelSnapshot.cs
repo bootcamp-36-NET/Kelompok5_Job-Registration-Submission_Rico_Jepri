@@ -25,17 +25,17 @@ namespace JobRegistrationSubmisson.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<DateTimeOffset>("CreatedData");
+                    b.Property<DateTimeOffset>("CreateTime");
 
-                    b.Property<DateTimeOffset>("DeletedData");
+                    b.Property<DateTimeOffset>("DeleteTime");
 
-                    b.Property<DateTimeOffset>("UpdatedData");
+                    b.Property<bool>("IsDelete");
 
-                    b.Property<bool>("isDelete");
+                    b.Property<DateTimeOffset>("UpdateTime");
 
                     b.HasKey("EmpId");
 
-                    b.ToTable("TB_M_Employee");
+                    b.ToTable("Tb_Employees");
                 });
 
             modelBuilder.Entity("JobRegistrationSubmisson.Models.Joblist", b =>

@@ -26,7 +26,7 @@ namespace JobRegistrationSubmisson.Controllers
         }
 
         ///[Authorize]
-        // GET api/values
+        //GET api/values
         [HttpGet]
         public async Task<List<JobSeekerVM>> GetAll()
         {

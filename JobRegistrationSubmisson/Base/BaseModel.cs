@@ -8,7 +8,6 @@ namespace JobRegistrationSubmisson.Base
     public interface BaseModel
     {
         int Id { get; set; }
-        string Name { get; set; }
         DateTimeOffset CreateData { get; set; }
         DateTimeOffset UpdateDate { get; set; }
         DateTimeOffset DeleteData { get; set; }

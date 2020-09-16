@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace JobRegistrationSubmisson.Models
 {
     [Table("TB_M_JobSeeker")]
-    public class JobSeeker 
+    public class JobSeeker
     {
         public string JobSId { get; set; }
         public string Address { get; set; }

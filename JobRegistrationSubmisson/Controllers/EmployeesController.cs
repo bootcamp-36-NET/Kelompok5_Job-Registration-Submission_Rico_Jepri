@@ -104,7 +104,7 @@ namespace JobRegistrationSubmisson.Controllers
                 getId.User.Email = userVM.Email;
                 getId.User.PasswordHash = hasbcrypt;
                 getId.User.PhoneNumber = userVM.Phone;
-                getId.UpdatedData = DateTimeOffset.Now;
+                getId.UpdateTime = DateTimeOffset.Now;
                 _context.SaveChanges();
                 return Ok("Successfully Update");
             }
@@ -123,8 +123,8 @@ namespace JobRegistrationSubmisson.Controllers
                 {
                     return BadRequest("Not Succsessfully");
                 }
-                getData.DeletedData = DateTimeOffset.Now;
-                getData.isDelete = true;
+                getData.DeleteTime = DateTimeOffset.Now;
+                getData.IsDelete = true;
 
                 _context.Entry(getData).State = EntityState.Modified;
                 _context.SaveChangesAsync();

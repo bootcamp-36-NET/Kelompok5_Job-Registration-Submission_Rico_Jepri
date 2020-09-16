@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace JobRegistrationSubmisson.Models
 {
-    [Table ("TB_M_Employee")]
+    [Table ("Tb_Employees")]
     public class Employees
     {
+        [Key]
         public string EmpId { get; set; }
         public string Address { get; set; }
-        public DateTimeOffset CreatedData { get; set; }
-        public DateTimeOffset UpdatedData { get; set; }
-        public DateTimeOffset DeletedData { get; set; }
-        public bool isDelete { get; set; }
+        public DateTimeOffset CreateTime { get; set; }
+        public DateTimeOffset UpdateTime { get; set; }
+        public DateTimeOffset DeleteTime { get; set; }
+        public bool IsDelete { get; set; }
 
         public virtual User User { get; set; }
 
