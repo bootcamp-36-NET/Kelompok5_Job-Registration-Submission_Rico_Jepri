@@ -11,5 +11,7 @@ namespace JobRegistrationSubmisson.Models
     public class User : IdentityUser
     {
         public ICollection<UserRole> userRoles { get; set; }
+        public virtual Employees Employees { get; set; }
+        public virtual JobSeeker JobSeeker { get; set; }
     }
 }

@@ -10,16 +10,58 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobRegistrationSubmisson.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20200915105221_InitTable")]
-    partial class InitTable
+    [Migration("20200915142734_initTBemp")]
+    partial class initTBemp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
+                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("JobRegistrationSubmisson.Models.Employees", b =>
+                {
+                    b.Property<string>("EmpId");
+
+                    b.Property<string>("Address");
+
+                    b.HasKey("EmpId");
+
+                    b.ToTable("TB_M_Employee");
+                });
+
+            modelBuilder.Entity("JobRegistrationSubmisson.Models.JobSeeker", b =>
+                {
+                    b.Property<string>("JobSId");
+
+                    b.Property<string>("Achievement");
+
+                    b.Property<string>("Address");
+
+                    b.Property<DateTime>("Birth_Date");
+
+                    b.Property<string>("Experience");
+
+                    b.Property<string>("GPA");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<string>("Last_Education");
+
+                    b.Property<string>("Marital_Status");
+
+                    b.Property<string>("Nationality");
+
+                    b.Property<string>("Religion");
+
+                    b.Property<string>("Technical_Skill");
+
+                    b.HasKey("JobSId");
+
+                    b.ToTable("TB_M_JobSeeker");
+                });
 
             modelBuilder.Entity("JobRegistrationSubmisson.Models.Role", b =>
                 {
@@ -86,6 +128,22 @@ namespace JobRegistrationSubmisson.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Tb_M_UserRole");
+                });
+
+            modelBuilder.Entity("JobRegistrationSubmisson.Models.Employees", b =>
+                {
+                    b.HasOne("JobRegistrationSubmisson.Models.User", "User")
+                        .WithOne("Employees")
+                        .HasForeignKey("JobRegistrationSubmisson.Models.Employees", "EmpId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("JobRegistrationSubmisson.Models.JobSeeker", b =>
+                {
+                    b.HasOne("JobRegistrationSubmisson.Models.User", "User")
+                        .WithOne("JobSeeker")
+                        .HasForeignKey("JobRegistrationSubmisson.Models.JobSeeker", "JobSId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("JobRegistrationSubmisson.Models.UserRole", b =>

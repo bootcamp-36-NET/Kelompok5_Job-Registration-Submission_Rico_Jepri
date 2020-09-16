@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JobRegistrationSubmisson.Migrations
 {
-    public partial class InitTable : Migration
+    public partial class initTBemp : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,6 +47,52 @@ namespace JobRegistrationSubmisson.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TB_M_Employee",
+                columns: table => new
+                {
+                    EmpId = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_M_Employee", x => x.EmpId);
+                    table.ForeignKey(
+                        name: "FK_TB_M_Employee_TB_M_User_EmpId",
+                        column: x => x.EmpId,
+                        principalTable: "TB_M_User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TB_M_JobSeeker",
+                columns: table => new
+                {
+                    JobSId = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: true),
+                    Birth_Date = table.Column<DateTime>(nullable: false),
+                    Nationality = table.Column<string>(nullable: true),
+                    Marital_Status = table.Column<string>(nullable: true),
+                    Gender = table.Column<string>(nullable: true),
+                    Religion = table.Column<string>(nullable: true),
+                    Last_Education = table.Column<string>(nullable: true),
+                    GPA = table.Column<string>(nullable: true),
+                    Technical_Skill = table.Column<string>(nullable: true),
+                    Experience = table.Column<string>(nullable: true),
+                    Achievement = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_M_JobSeeker", x => x.JobSId);
+                    table.ForeignKey(
+                        name: "FK_TB_M_JobSeeker_TB_M_User_JobSId",
+                        column: x => x.JobSId,
+                        principalTable: "TB_M_User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tb_M_UserRole",
                 columns: table => new
                 {
@@ -78,6 +124,12 @@ namespace JobRegistrationSubmisson.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "TB_M_Employee");
+
+            migrationBuilder.DropTable(
+                name: "TB_M_JobSeeker");
+
             migrationBuilder.DropTable(
                 name: "Tb_M_UserRole");
 

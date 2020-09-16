@@ -4631,7 +4631,7 @@
         "dependencies": {
           "BCrypt.Net-Core": "1.6.0",
           "Microsoft.NETCore.App": "2.1.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.9"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.10"
         },
         "compile": {
           "bin/placeholder/JobRegistrationSubmisson.dll": {}
@@ -12582,23 +12582,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Jepri\\.nuget\\packages\\": {},
+    "C:\\Users\\Enrico\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jepri\\Documents\\Visual Studio 2017\\Projects\\JobRegistrationSubmisson\\WebClient\\WebClient.csproj",
+      "projectUniqueName": "F:\\program\\Kelompok5_Job-Registration-Submission_Rico_Jepri-Jepri\\WebClient\\WebClient.csproj",
       "projectName": "WebClient",
-      "projectPath": "C:\\Users\\Jepri\\Documents\\Visual Studio 2017\\Projects\\JobRegistrationSubmisson\\WebClient\\WebClient.csproj",
-      "packagesPath": "C:\\Users\\Jepri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jepri\\Documents\\Visual Studio 2017\\Projects\\JobRegistrationSubmisson\\WebClient\\obj\\",
+      "projectPath": "F:\\program\\Kelompok5_Job-Registration-Submission_Rico_Jepri-Jepri\\WebClient\\WebClient.csproj",
+      "packagesPath": "C:\\Users\\Enrico\\.nuget\\packages\\",
+      "outputPath": "F:\\program\\Kelompok5_Job-Registration-Submission_Rico_Jepri-Jepri\\WebClient\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Jepri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Enrico\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12611,8 +12611,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\Jepri\\Documents\\Visual Studio 2017\\Projects\\JobRegistrationSubmisson\\JobRegistrationSubmisson\\JobRegistrationSubmisson.csproj": {
-              "projectPath": "C:\\Users\\Jepri\\Documents\\Visual Studio 2017\\Projects\\JobRegistrationSubmisson\\JobRegistrationSubmisson\\JobRegistrationSubmisson.csproj"
+            "F:\\program\\Kelompok5_Job-Registration-Submission_Rico_Jepri-Jepri\\JobRegistrationSubmisson\\JobRegistrationSubmisson.csproj": {
+              "projectPath": "F:\\program\\Kelompok5_Job-Registration-Submission_Rico_Jepri-Jepri\\JobRegistrationSubmisson\\JobRegistrationSubmisson.csproj"
             }
           }
         }
@@ -12654,5 +12654,16 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Detected package downgrade: Microsoft.VisualStudio.Web.CodeGeneration.Design from 2.1.10 to 2.1.9. Reference the package directly from the project to select a different version. \r\n WebClient -> JobRegistrationSubmisson -> Microsoft.VisualStudio.Web.CodeGeneration.Design (>= 2.1.10) \r\n WebClient -> Microsoft.VisualStudio.Web.CodeGeneration.Design (>= 2.1.9)",
+      "libraryId": "Microsoft.VisualStudio.Web.CodeGeneration.Design",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.1"
+      ]
+    }
+  ]
 }
