@@ -156,7 +156,8 @@ namespace JobRegistrationSubmisson.Controllers
                     JobS.RegistDate = DateTimeOffset.Now;
                     JobS.Reject = false;
                     JobS.Approve = false;
-                    _context.jobSeekers.AddAsync(JobS);
+                    JobS.JoblistId = userVM.Joblists;
+                    _context.JobSeekers.AddAsync(JobS);
 
                 }
 

@@ -28,6 +28,8 @@ namespace JobRegistrationSubmisson.ViewModel
         public DateTimeOffset RejectDate { get; set; }
         public bool Approve { get; set; }
         public bool Reject { get; set; }
-        public string Joblist { get; set; }
+        public int JoblistId { get; set; }
+        public string JoblistName { get; set; }
+
     }
 }

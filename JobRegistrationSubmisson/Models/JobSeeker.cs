@@ -10,6 +10,9 @@ namespace JobRegistrationSubmisson.Models
     public class JobSeeker
     {
         public string JobSId { get; set; }
+        //public int JobLId { get; set; }
+        //[ForeignKey("Joblist")]
+        public int JoblistId { get; set; }
         public string Address { get; set; }
         public DateTime Birth_Date { get; set; }
         public string Nationality { get; set; }
@@ -28,7 +31,7 @@ namespace JobRegistrationSubmisson.Models
         public bool Reject { get; set; }
 
 
-        public virtual User User { get; set; }
+        public User User { get; set; }
         public Joblist Joblist { get; set; }
 
     }

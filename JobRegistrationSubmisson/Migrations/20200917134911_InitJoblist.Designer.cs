@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobRegistrationSubmisson.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20200916100504_initemployee")]
-    partial class initemployee
+    [Migration("20200917134911_InitJoblist")]
+    partial class InitJoblist
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,7 +63,7 @@ namespace JobRegistrationSubmisson.Migrations
 
             modelBuilder.Entity("JobRegistrationSubmisson.Models.JobSeeker", b =>
                 {
-                    b.Property<string>("JobSId");
+                    b.Property<int>("JoblistId");
 
                     b.Property<string>("Achievement");
 
@@ -79,7 +79,8 @@ namespace JobRegistrationSubmisson.Migrations
 
                     b.Property<string>("Gender");
 
-                    b.Property<int?>("JoblistId");
+                    b.Property<string>("JobSId")
+                        .IsRequired();
 
                     b.Property<string>("Last_Education");
 
@@ -99,9 +100,9 @@ namespace JobRegistrationSubmisson.Migrations
 
                     b.Property<DateTimeOffset>("UpdateDate");
 
-                    b.HasKey("JobSId");
+                    b.HasKey("JoblistId");
 
-                    b.HasIndex("JoblistId");
+                    b.HasAlternateKey("JobSId");
 
                     b.ToTable("TB_M_JobSeeker");
                 });
@@ -189,8 +190,9 @@ namespace JobRegistrationSubmisson.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("JobRegistrationSubmisson.Models.Joblist", "Joblist")
-                        .WithMany()
-                        .HasForeignKey("JoblistId");
+                        .WithMany("jobSeekers")
+                        .HasForeignKey("JoblistId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("JobRegistrationSubmisson.Models.UserRole", b =>

@@ -1,4 +1,4 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http
 @{
     Layout = null;
 }
@@ -22,7 +22,7 @@
 <body class="bg-silver-300">
     <div class="content">
         <div class="brand">
-            <a class="link" href="index.html">AdminCAST</a>
+            <a class="link" href="/joblists">Job Registration Submissson</a>
         </div>
         <form id="register-form" action="javascript:;" method="post">
             <h2 class="login-title">Sign Up</h2>
@@ -37,6 +37,9 @@
                         <input class="form-control" type="text" id="Phone" placeholder="Phone">
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" id="joblist" value="@Context.Session.GetInt32("joblist")" hidden>
             </div>
             <div class="form-group">
                 <input class="form-control" type="email" id="Email" placeholder="Email" autocomplete="off">

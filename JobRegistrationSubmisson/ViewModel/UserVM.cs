@@ -15,5 +15,6 @@ namespace JobRegistrationSubmisson.ViewModel
         public string RoleID { get; set; }
         public string RoleName { get; set; }
         public string VerifyCode { get; set; }
+        public int Joblists { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JobRegistrationSubmisson.Context;
+using JobRegistrationSubmisson.Models;
 using JobRegistrationSubmisson.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,7 +33,7 @@ namespace JobRegistrationSubmisson.Controllers
         {
             List<JobSeekerVM> list = new List<JobSeekerVM>();
             //var user = new UserVM();
-            var getData = await _context.jobSeekers.Include("User").Where(Q => Q.Reject == false).ToListAsync();
+            var getData = await _context.JobSeekers.Include("User").Where(Q => Q.Reject == false).ToListAsync();
             //var getData = await _context.jobSeekers.Include("User").ToListAsync();
             if (getData.Count == 0)
             {
@@ -48,7 +49,7 @@ namespace JobRegistrationSubmisson.Controllers
                     Address = item.Address,
                     //Password = item.User.PasswordHash,
                     Phone = item.User.PhoneNumber,
-                    Joblist = item.Joblist.Name
+                    //JoblistName = item.Joblist.Name
                     //CreatedData = item.CreatedData,
                     //UpdatedData = item.UpdatedData
                     //RoleName = item.Role.Name,
@@ -68,12 +69,44 @@ namespace JobRegistrationSubmisson.Controllers
 
         //[Authorize]
 
+        [HttpPost]
+        public IActionResult Create(JobSeekerVM jobSeekerVM)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                var JobS = new JobSeeker();
+                //JobS.JobSId = jobSeekerVM.JobSId;
+                JobS.User.UserName = jobSeekerVM.Username;
+                JobS.Gender = jobSeekerVM.Gender;
+                JobS.Birth_Date = jobSeekerVM.Birth_Date;
+                JobS.Address = jobSeekerVM.Address;
+                JobS.Religion = jobSeekerVM.Religion;
+                JobS.Marital_Status = jobSeekerVM.Marital_Status;
+                JobS.Nationality = jobSeekerVM.Nationality;
+                JobS.Last_Education = jobSeekerVM.Last_Education;
+                JobS.GPA = jobSeekerVM.GPA;
+                JobS.Technical_Skill = jobSeekerVM.Technical_Skill;
+                JobS.Experience = jobSeekerVM.Experience;
+                JobS.Achievement = jobSeekerVM.Achievement;
+                JobS.JoblistId = jobSeekerVM.JoblistId;
+                JobS.RegistDate = DateTimeOffset.Now;
+                JobS.Reject = false;
+                JobS.Approve = false;
+                _context.JobSeekers.AddAsync(JobS);
+
+                _context.SaveChanges();
+                return Ok("Successfully Created");
+            }
+            return BadRequest("Not Successfully");
+        }
+
 
 
         [HttpGet("{id}")]
         public JobSeekerVM GetID(string id)
         {
-            var getData = _context.jobSeekers.Include("User").SingleOrDefault(x => x.JobSId == id);
+            var getData = _context.JobSeekers.Include("User").SingleOrDefault(x => x.JobSId == id);
             if (getData == null || getData.User == null)
             {
                 return null;
@@ -93,19 +126,31 @@ namespace JobRegistrationSubmisson.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(string id, UserVM userVM)
+        public IActionResult Update(string id, JobSeekerVM jobSeekerVM)
         {
             if (ModelState.IsValid)
             {
-                var getId = _context.jobSeekers.Include("User").SingleOrDefault(x => x.JobSId == id);
+                var JobS = _context.JobSeekers.Include("User").SingleOrDefault(x => x.JobSId == id);
                 //var getId = _context.Users.Find(id);
-                var hasbcrypt = BCrypt.Net.BCrypt.HashPassword(userVM.Password, 12);
-                getId.User.Id = userVM.Id;
-                getId.User.UserName = userVM.Username;
-                getId.User.Email = userVM.Email;
-                getId.User.PasswordHash = hasbcrypt;
-                getId.User.PhoneNumber = userVM.Phone;
-                getId.UpdateDate = DateTimeOffset.Now;
+                //var hasbcrypt = BCrypt.Net.BCrypt.HashPassword(jobSeekerVM.Password, 12);
+                JobS.User.Id = jobSeekerVM.JobSId;
+                JobS.User.UserName = jobSeekerVM.Username;
+                JobS.Gender = jobSeekerVM.Gender;
+                JobS.Birth_Date = jobSeekerVM.Birth_Date;
+                JobS.Address = jobSeekerVM.Address;
+                JobS.Religion = jobSeekerVM.Religion;
+                JobS.Marital_Status = jobSeekerVM.Marital_Status;
+                JobS.Nationality = jobSeekerVM.Nationality;
+                JobS.Last_Education = jobSeekerVM.Last_Education;
+                JobS.GPA = jobSeekerVM.GPA;
+                JobS.Technical_Skill = jobSeekerVM.Technical_Skill;
+                JobS.Experience = jobSeekerVM.Experience;
+                JobS.Achievement = jobSeekerVM.Achievement;
+                //JobS = jobSeekerVM.JoblistId;
+                JobS.Reject = false;
+                JobS.Approve = false;
+                JobS.UpdateDate = DateTimeOffset.Now;
+
                 _context.SaveChanges();
                 return Ok("Successfully Update");
             }
@@ -119,7 +164,7 @@ namespace JobRegistrationSubmisson.Controllers
         {
             if (ModelState.IsValid)
             {
-                var getData = _context.jobSeekers.Include("User").SingleOrDefault(x => x.JobSId == id);
+                var getData = _context.JobSeekers.Include("User").SingleOrDefault(x => x.JobSId == id);
                 if (getData == null)
                 {
                     return BadRequest("Not Succsessfully");
