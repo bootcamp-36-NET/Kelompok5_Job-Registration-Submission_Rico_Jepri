@@ -24,11 +24,11 @@ namespace WebClient.Controllers
             {
                 if (HttpContext.Session.GetString("lvl") == "HR")
                 {
-                    return View();
+                    return View("~/Views/Employees/Index.cshtml");
                 }
                 return Redirect("/profile");
             }
-            return RedirectToAction("Login", "Auth");
+            return RedirectToAction("Login", "Accounts");
         }
 
         

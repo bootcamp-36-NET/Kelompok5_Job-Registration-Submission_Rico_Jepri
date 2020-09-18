@@ -11,17 +11,25 @@ using Newtonsoft.Json;
 
 namespace WebClient.Controllers
 {
-    public class JoblistsController : Controller
+    public class ManageJoblistController : Controller
     {
+
         readonly HttpClient client = new HttpClient
         {
             BaseAddress = new Uri("https://localhost:44303/api/")
         };
-
-
         public IActionResult Index()
         {
-            return View("~/Views/Joblists/ListJobs.cshtml");
+            if (HttpContext.Session.IsAvailable)
+            {
+                if (HttpContext.Session.GetString("lvl") == "HR")
+                {
+                    return View("~/Views/Joblists/ManageJoblist.cshtml");
+                }
+                return Redirect("/profile");
+            }
+            return RedirectToAction("Login", "Accounts");
+            
         }
 
         public IActionResult LoadJoblist()
@@ -69,5 +77,42 @@ namespace WebClient.Controllers
             return Json(joblist);
         }
 
+        public IActionResult InsertOrUpdate(Joblist joblist, int id)
+        {
+            try
+            {
+                var json = JsonConvert.SerializeObject(joblist);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+                var byteContent = new ByteArrayContent(buffer);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                //var token = HttpContext.Session.GetString("token");
+                //client.DefaultRequestHeaders.Add("Authorization", token);
+                if (joblist.Id == 0)
+                {
+                    var result = client.PostAsync("joblists", byteContent).Result;
+                    return Json(result);
+                }
+                else if (joblist.Id == id)
+                {
+                    var result = client.PutAsync("joblists/" + id, byteContent).Result;
+                    return Json(result);
+                }
+
+                return Json(404);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IActionResult Delete(int id)
+        {
+            //var token = HttpContext.Session.GetString("token");
+            //client.DefaultRequestHeaders.Add("Authorization", token);
+            var result = client.DeleteAsync("joblists/" + id).Result;
+            return Json(result);
+        }
     }
 }

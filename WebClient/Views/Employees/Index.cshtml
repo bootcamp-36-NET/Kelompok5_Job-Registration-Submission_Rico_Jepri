@@ -6,6 +6,90 @@
 
 
 <div class="content-wrapper">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header no-bd">
+                    <h5 class="modal-title"><span class="fw-mediumbold">Job list</span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr hidden>
+                                <th width="30%">Id</th>
+                                <th>:</th>
+                                <td id="Id"> </td>
+                            </tr>
+                            <tr>
+                                <th width="30%">Name</th>
+                                <th>:</th>
+                                <td id="Name"> </td>
+                            </tr>
+                            <tr>
+                                <th>Gender</th>
+                                <th width="10%">:</th>
+                                <td id="Gender"></td>
+                            </tr>
+                            <tr>
+                                <th>Birth Date</th>
+                                <th>:</th>
+                                <td id="BirthDate"></td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <th>:</th>
+                                <td id="Address"></td>
+                            </tr>
+                            <tr>
+                                <th>Religion</th>
+                                <th>:</th>
+                                <td id="Religion"></td>
+                            </tr>
+                            <tr>
+                                <th>Marital Status</th>
+                                <th>:</th>
+                                <td id="MaritalStatus"></td>
+                            </tr>
+                            <tr>
+                                <th>Nasionality</th>
+                                <th>:</th>
+                                <td id="Nasionality"></td>
+                            </tr>
+                            <tr>
+                                <th>Last Education</th>
+                                <th>:</th>
+                                <td id="LastEducation"></td>
+                            </tr>
+                            <tr>
+                                <th>GPA</th>
+                                <th>:</th>
+                                <td id="GPA"></td>
+                            </tr>
+                            <tr>
+                                <th>Experience</th>
+                                <th>:</th>
+                                <td id="Experience"></td>
+                            </tr>
+                            <tr>
+                                <th>Achievement</th>
+                                <th>:</th>
+                                <td id="Achievement"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer no-bd">
+                    @*<button type="button" id="add" class="btn btn-outline-success" data-dismiss="modal" onclick="Save();">Insert</button>*@
+                    <button type="button" id="approve" class="btn btn-outline-success" data-dismiss="modal" onclick="Approve()">Approve</button>
+                    <button type="button" id="reject" class="btn btn-outline-danger" data-dismiss="modal" onclick="Reject()">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
     <!-- START PAGE CONTENT-->
     <div class="page-heading">
         <h1 class="page-title">DataTables</h1>
@@ -44,5 +128,6 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/Script/Joblist.js"></script>
+    <script src="~/js/sweetalert2@9.js"></script>
+    <script src="~/js/Script/Employee.js"></script>
 }

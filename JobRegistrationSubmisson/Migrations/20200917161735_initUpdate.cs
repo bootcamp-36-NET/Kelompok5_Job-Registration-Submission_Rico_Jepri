@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JobRegistrationSubmisson.Migrations
 {
-    public partial class InitJoblist : Migration
+    public partial class initUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -87,6 +87,39 @@ namespace JobRegistrationSubmisson.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TB_M_JobSeeker",
+                columns: table => new
+                {
+                    JobSId = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: true),
+                    Birth_Date = table.Column<DateTime>(nullable: false),
+                    Nationality = table.Column<string>(nullable: true),
+                    Marital_Status = table.Column<string>(nullable: true),
+                    Gender = table.Column<string>(nullable: true),
+                    Religion = table.Column<string>(nullable: true),
+                    Last_Education = table.Column<string>(nullable: true),
+                    GPA = table.Column<string>(nullable: true),
+                    Technical_Skill = table.Column<string>(nullable: true),
+                    Experience = table.Column<string>(nullable: true),
+                    Achievement = table.Column<string>(nullable: true),
+                    RegistDate = table.Column<DateTimeOffset>(nullable: false),
+                    UpdateDate = table.Column<DateTimeOffset>(nullable: false),
+                    RejectDate = table.Column<DateTimeOffset>(nullable: false),
+                    Approve = table.Column<bool>(nullable: false),
+                    Reject = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_M_JobSeeker", x => x.JobSId);
+                    table.ForeignKey(
+                        name: "FK_TB_M_JobSeeker_TB_M_User_JobSId",
+                        column: x => x.JobSId,
+                        principalTable: "TB_M_User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tb_M_UserRole",
                 columns: table => new
                 {
@@ -111,45 +144,33 @@ namespace JobRegistrationSubmisson.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TB_M_JobSeeker",
+                name: "Tb_M_JobSeekerList",
                 columns: table => new
                 {
-                    JobSId = table.Column<string>(nullable: false),
-                    JoblistId = table.Column<int>(nullable: false),
-                    Address = table.Column<string>(nullable: true),
-                    Birth_Date = table.Column<DateTime>(nullable: false),
-                    Nationality = table.Column<string>(nullable: true),
-                    Marital_Status = table.Column<string>(nullable: true),
-                    Gender = table.Column<string>(nullable: true),
-                    Religion = table.Column<string>(nullable: true),
-                    Last_Education = table.Column<string>(nullable: true),
-                    GPA = table.Column<string>(nullable: true),
-                    Technical_Skill = table.Column<string>(nullable: true),
-                    Experience = table.Column<string>(nullable: true),
-                    Achievement = table.Column<string>(nullable: true),
-                    RegistDate = table.Column<DateTimeOffset>(nullable: false),
-                    UpdateDate = table.Column<DateTimeOffset>(nullable: false),
-                    RejectDate = table.Column<DateTimeOffset>(nullable: false),
-                    Approve = table.Column<bool>(nullable: false),
-                    Reject = table.Column<bool>(nullable: false)
+                    JobSeekerId = table.Column<string>(nullable: false),
+                    JoblistId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_M_JobSeeker", x => x.JoblistId);
-                    table.UniqueConstraint("AK_TB_M_JobSeeker_JobSId", x => x.JobSId);
+                    table.PrimaryKey("PK_Tb_M_JobSeekerList", x => x.JobSeekerId);
                     table.ForeignKey(
-                        name: "FK_TB_M_JobSeeker_TB_M_User_JobSId",
-                        column: x => x.JobSId,
-                        principalTable: "TB_M_User",
-                        principalColumn: "Id",
+                        name: "FK_Tb_M_JobSeekerList_TB_M_JobSeeker_JobSeekerId",
+                        column: x => x.JobSeekerId,
+                        principalTable: "TB_M_JobSeeker",
+                        principalColumn: "JobSId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TB_M_JobSeeker_TB_Trans_Joblist_JoblistId",
+                        name: "FK_Tb_M_JobSeekerList_TB_Trans_Joblist_JoblistId",
                         column: x => x.JoblistId,
                         principalTable: "TB_Trans_Joblist",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tb_M_JobSeekerList_JoblistId",
+                table: "Tb_M_JobSeekerList",
+                column: "JoblistId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tb_M_UserRole_RoleId",
@@ -163,10 +184,13 @@ namespace JobRegistrationSubmisson.Migrations
                 name: "Tb_Employees");
 
             migrationBuilder.DropTable(
-                name: "TB_M_JobSeeker");
+                name: "Tb_M_JobSeekerList");
 
             migrationBuilder.DropTable(
                 name: "Tb_M_UserRole");
+
+            migrationBuilder.DropTable(
+                name: "TB_M_JobSeeker");
 
             migrationBuilder.DropTable(
                 name: "TB_Trans_Joblist");

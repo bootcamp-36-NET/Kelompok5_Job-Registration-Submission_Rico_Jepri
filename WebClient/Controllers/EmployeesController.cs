@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using JobRegistrationSubmisson.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace WebClient.Controllers
 
         public IActionResult Index()
         {
-            return View("");
+            return View("~/Views/Employees/Index.cshtml");
         }
 
         public IActionResult LoadJobSeeker()
@@ -47,7 +48,7 @@ namespace WebClient.Controllers
 
         public IActionResult GetById(string Id)
         {
-            EmployeeVM emp = null;
+            JobSeekerVM emp = null;
             //var token = HttpContext.Session.GetString("token");
             //client.DefaultRequestHeaders.Add("Authorization", token);
             var resTask = client.GetAsync("jobseekers/" + Id);
@@ -57,7 +58,7 @@ namespace WebClient.Controllers
             if (result.IsSuccessStatusCode)
             {
                 var json = JsonConvert.DeserializeObject(result.Content.ReadAsStringAsync().Result).ToString();
-                emp = JsonConvert.DeserializeObject<EmployeeVM>(json);
+                emp = JsonConvert.DeserializeObject<JobSeekerVM>(json);
             }
             else
             {
@@ -70,8 +71,38 @@ namespace WebClient.Controllers
         {
             //var token = HttpContext.Session.GetString("token");
             //client.DefaultRequestHeaders.Add("Authorization", token);
-            var result = client.DeleteAsync("employees/" + id).Result;
+            var result = client.DeleteAsync("jobseekers/" + id).Result;
             return Json(result);
+        }
+
+        public IActionResult Approve(UserVM userVM)
+        {
+            var json = JsonConvert.SerializeObject(userVM);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpResponseMessage result = null;
+            if (userVM.Id != null)
+            {
+                result = client.PostAsync("employees/Approve/", byteContent).Result;
+                return Json(result);
+            }
+            return Json(404);
+        }
+
+        public IActionResult Reject(UserVM userVM)
+        {
+            var json = JsonConvert.SerializeObject(userVM);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpResponseMessage result = null;
+            if (userVM.Id != null)
+            {
+                result = client.PostAsync("employees/Reject/", byteContent).Result;
+                return Json(result);
+            }
+            return Json(404);
         }
     }
 }

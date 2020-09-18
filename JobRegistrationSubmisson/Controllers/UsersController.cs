@@ -125,7 +125,9 @@ namespace JobRegistrationSubmisson.Controllers
                 var roleuser = new UserRole();
                 var JobS = new JobSeeker();
                 var emp = new Employees();
+                var JobSList = new JobSeekerList();
                 var role = _context.Roles.Where(r => r.Name == userVM.RoleName).FirstOrDefault();
+                var joblist = _context.Joblists.Where(Q => Q.Name == userVM.JoblistName).FirstOrDefault();
 
                 user.UserName = userVM.Username;
                 user.Email = userVM.Email;
@@ -156,10 +158,14 @@ namespace JobRegistrationSubmisson.Controllers
                     JobS.RegistDate = DateTimeOffset.Now;
                     JobS.Reject = false;
                     JobS.Approve = false;
-                    JobS.JoblistId = userVM.Joblists;
+                    JobSList.JoblistId = userVM.Joblists;
                     _context.JobSeekers.AddAsync(JobS);
 
                 }
+
+                JobSList.Joblist = joblist;
+                JobSList.JobSeeker = JobS;
+                _context.JobSeekerLists.AddAsync(JobSList);
 
                 _context.SaveChanges();
                 return Ok("Successfully Created");

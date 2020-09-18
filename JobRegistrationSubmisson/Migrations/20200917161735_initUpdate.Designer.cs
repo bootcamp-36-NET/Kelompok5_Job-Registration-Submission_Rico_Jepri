@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobRegistrationSubmisson.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20200917134911_InitJoblist")]
-    partial class InitJoblist
+    [Migration("20200917161735_initUpdate")]
+    partial class initUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,7 +63,7 @@ namespace JobRegistrationSubmisson.Migrations
 
             modelBuilder.Entity("JobRegistrationSubmisson.Models.JobSeeker", b =>
                 {
-                    b.Property<int>("JoblistId");
+                    b.Property<string>("JobSId");
 
                     b.Property<string>("Achievement");
 
@@ -78,9 +78,6 @@ namespace JobRegistrationSubmisson.Migrations
                     b.Property<string>("GPA");
 
                     b.Property<string>("Gender");
-
-                    b.Property<string>("JobSId")
-                        .IsRequired();
 
                     b.Property<string>("Last_Education");
 
@@ -100,11 +97,22 @@ namespace JobRegistrationSubmisson.Migrations
 
                     b.Property<DateTimeOffset>("UpdateDate");
 
-                    b.HasKey("JoblistId");
-
-                    b.HasAlternateKey("JobSId");
+                    b.HasKey("JobSId");
 
                     b.ToTable("TB_M_JobSeeker");
+                });
+
+            modelBuilder.Entity("JobRegistrationSubmisson.Models.JobSeekerList", b =>
+                {
+                    b.Property<string>("JobSeekerId");
+
+                    b.Property<int>("JoblistId");
+
+                    b.HasKey("JobSeekerId");
+
+                    b.HasIndex("JoblistId");
+
+                    b.ToTable("Tb_M_JobSeekerList");
                 });
 
             modelBuilder.Entity("JobRegistrationSubmisson.Models.Role", b =>
@@ -188,9 +196,17 @@ namespace JobRegistrationSubmisson.Migrations
                         .WithOne("JobSeeker")
                         .HasForeignKey("JobRegistrationSubmisson.Models.JobSeeker", "JobSId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("JobRegistrationSubmisson.Models.JobSeekerList", b =>
+                {
+                    b.HasOne("JobRegistrationSubmisson.Models.JobSeeker", "JobSeeker")
+                        .WithMany("jobSeekerLists")
+                        .HasForeignKey("JobSeekerId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("JobRegistrationSubmisson.Models.Joblist", "Joblist")
-                        .WithMany("jobSeekers")
+                        .WithMany()
                         .HasForeignKey("JoblistId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

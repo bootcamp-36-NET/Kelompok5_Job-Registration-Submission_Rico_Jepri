@@ -11,3 +11,4 @@ C:\Users\Jepri\Documents\Visual Studio 2017\Projects\JobRegistrationSubmisson\Jo
 C:\Users\Jepri\Documents\Visual Studio 2017\Projects\JobRegistrationSubmisson\JobRegistrationSubmisson\obj\Debug\netcoreapp2.1\JobRegistrationSubmisson.RazorTargetAssemblyInfo.cache
 C:\Users\Jepri\Documents\Visual Studio 2017\Projects\JobRegistrationSubmisson\JobRegistrationSubmisson\obj\Debug\netcoreapp2.1\JobRegistrationSubmisson.dll
 C:\Users\Jepri\Documents\Visual Studio 2017\Projects\JobRegistrationSubmisson\JobRegistrationSubmisson\obj\Debug\netcoreapp2.1\JobRegistrationSubmisson.pdb
+C:\Users\Jepri\Documents\Visual Studio 2017\Projects\JobRegistrationSubmisson\JobRegistrationSubmisson\obj\Debug\netcoreapp2.1\JobRegistrationSubmisson.csprojAssemblyReference.cache

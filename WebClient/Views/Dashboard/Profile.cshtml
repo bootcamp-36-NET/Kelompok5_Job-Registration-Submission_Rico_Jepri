@@ -29,10 +29,14 @@
                         <div class="ibox">
                             <div class="ibox-body text-center">
                                 <div class="m-t-20">
-                                    <img class="img-circle" src="./assets/img/users/u3.jpg" />
+                                    <img class="img-circle" src="~/html/dist/assets/img/users/u3.jpg" />
                                 </div>
-                                <h5 class="font-strong m-b-10 m-t-10">Frank Cruz</h5>
-                                <div class="m-b-20 text-muted">Web Developer</div>
+                                <h5 class="font-strong m-b-10 m-t-10">@Context.Session.GetString("uname")</h5>
+                                @if (@Context.Session.GetString("lvl") == "HR")
+                                {
+                                <div class="m-b-20 text-muted">@Context.Session.GetString("lvl")</div>
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -65,7 +69,11 @@
                                                 </div>
                                                 <div class="col-sm-6 form-group">
                                                     <label>Gender</label>
-                                                    <input class="form-control" type="text" placeholder="Gender" id="Gender">
+                                                    <select class="form-control" id="Action" name="Action">
+                                                        <option value="">Select Option</option>
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -82,7 +90,13 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Marital Status</label>
-                                                <input class="form-control" type="text" placeholder="Marital Status" id="MaritalStatus">
+                                                <select class="form-control" id="Action" name="Action">
+                                                    <option value="">Select Option</option>
+                                                    <option>Single</option>
+                                                    <option>Married</option>
+                                                    <option>Divorce</option>
+                                                    <option>Others</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label>Nasionality</label>
@@ -159,7 +173,9 @@
     </div>
 
     @section Scripts {
-     <script src="~/js/Script/JobSeeker.js"></script>
+        <script src="~/js/Script/JobSeeker.js"></script>
+        <script src="~/js/sweetalert2@9.js"></script>
+
     }
 </body>
 </html>
