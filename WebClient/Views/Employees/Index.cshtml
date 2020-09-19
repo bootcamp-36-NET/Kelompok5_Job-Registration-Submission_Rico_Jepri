@@ -8,7 +8,7 @@
 <div class="content-wrapper">
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" >
+            <div class="modal-content">
                 <div class="modal-header no-bd">
                     <h5 class="modal-title"><span class="fw-mediumbold">Job list</span></h5>
                     <div data-toggle="modal" data-target="#myModal" onclick="ClearScreen();">
@@ -99,14 +99,17 @@
             <li class="breadcrumb-item">
                 <a href="index.html"><i class="la la-home font-20"></i></a>
             </li>
+
         </ol>
     </div>
     <div class="page-content fade-in-up">
         <div class="ibox">
             @*<div class="ibox-head">
-                <div class="ibox-title">Data Table</div>
-            </div>*@
+                    <div class="ibox-title">Data Table</div>
+                </div>*@
             <div class="ibox-body">
+                <a asp-action="Excel" class="btn btn-success pull-right hidden-sm-down fa fa-file-excel-o" data-toggle="tooltip" title="Export Excel"></a>
+                <a asp-action="ExportPdf" class="btn btn-danger pull-right hidden-sm-down fa fa-file-pdf-o" data-toggle="tooltip" title="Export Pdf"></a>
                 <table class="table table-striped table-bordered table-hover" id="Jobseeker" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -131,4 +134,13 @@
 @section Scripts{
     <script src="~/js/sweetalert2@9.js"></script>
     <script src="~/js/Script/Employee.js"></script>
+
+    @*button export*@
+    <script src="~/js/buttons.flash.min.js"></script>
+    <script src="~/js/buttons.html5.min.js"></script>
+    <script src="~/js/buttons.print.min.js"></script>
+    <script src="~/js/dataTables.buttons.min.js"></script>
+    <script src="~/js/jszip.min.js"></script>
+    <script src="~/js/pdfmake.min.js"></script>
+    <script src="~/js/vfs_fonts.js"></script>
 }

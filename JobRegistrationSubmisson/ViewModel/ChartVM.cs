@@ -9,9 +9,15 @@ namespace JobRegistrationSubmisson.ViewModel
     {
        
     }
+    public class stsChartVM
+    {
+        public string status { get; set; }
+        public int total { get; set; }
+    }
     public class PieChartVM
     {
-        public string DepartmentName { get; set; }
+        public string status { get; set; }
+        public string JoblistName { get; set; }
         public int total { get; set; }
     }
     public class BarChartVM

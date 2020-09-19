@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 using JobRegistrationSubmisson.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ClosedXML.Excel;
 using Newtonsoft.Json;
+using System.IO;
+using WebClient.PDF;
 
 namespace WebClient.Controllers
 {
@@ -113,5 +116,66 @@ namespace WebClient.Controllers
             }
             return Json(404);
         }
+
+
+        /// <Load Charts>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+
+
+        [Route("charts")]
+        public IActionResult Charts()
+        {
+            return View();
+        }
+
+        public IActionResult LoadPie()
+        {
+            IEnumerable<PieChartVM> pie = null;
+            //var token = HttpContext.Session.GetString("token");
+            //client.DefaultRequestHeaders.Add("Authorization", token);
+            var resTask = client.GetAsync("charts/pie");
+            resTask.Wait();
+
+            var result = resTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<List<PieChartVM>>();
+                readTask.Wait();
+                pie = readTask.Result;
+            }
+            else
+            {
+                pie = Enumerable.Empty<PieChartVM>();
+                ModelState.AddModelError(string.Empty, "Server Error try after sometimes.");
+            }
+            return Json(pie);
+        }
+
+        public IActionResult LoadBar()
+        {
+            IEnumerable<PieChartVM> bar = null;
+            //var token = HttpContext.Session.GetString("token");
+            //client.DefaultRequestHeaders.Add("Authorization", token);
+            var resTask = client.GetAsync("charts/pie");
+            resTask.Wait();
+
+            var result = resTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<List<PieChartVM>>();
+                readTask.Wait();
+                bar = readTask.Result;
+            }
+            else
+            {
+                bar = Enumerable.Empty<PieChartVM>();
+                ModelState.AddModelError(string.Empty, "Server Error try after sometimes.");
+            }
+            return Json(bar);
+        }
+
+        
     }
 }
