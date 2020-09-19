@@ -26,7 +26,7 @@ namespace WebClient.Controllers
                 {
                     return View("~/Views/Employees/Index.cshtml");
                 }
-                return Redirect("/");
+                return Redirect("/profile");
             }
             return RedirectToAction("Login", "Accounts");
         }

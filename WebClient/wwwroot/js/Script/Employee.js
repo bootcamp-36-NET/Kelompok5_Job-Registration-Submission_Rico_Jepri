@@ -49,8 +49,21 @@ $(document).ready(function () {
 });
 
 function ClearScreen() {
-    $('#Id').val('');
-    $('#Name').val('');
+    debugger;
+    $('#Id').pop();
+    $('#Name').pop();
+    $('#Gender').pop();
+    $('#BirthDate').pop();
+    $('#Address').pop();
+    $('#Religion').pop();
+    $('#MaritalStatus').pop();
+    $('#Nasionality').pop();
+    $('#LastEducation').pop();
+    $('#GPA').pop();
+    $('#TechnicalSkill').pop();
+    $('#Experience').pop();
+    $('#Achievement').pop();
+        //$('#add').hide();
     $('#update').hide();
     $('#add').show();
 }
