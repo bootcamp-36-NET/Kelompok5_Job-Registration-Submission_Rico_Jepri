@@ -26,7 +26,7 @@ namespace WebClient.Controllers
                 {
                     return View("~/Views/Employees/Index.cshtml");
                 }
-                return Redirect("/profile");
+                return Redirect("/");
             }
             return RedirectToAction("Login", "Accounts");
         }
@@ -34,8 +34,16 @@ namespace WebClient.Controllers
         
         [Route("profile")]
         public IActionResult Profile()
-        {
-            return View();
+        {            
+            if (HttpContext.Session.IsAvailable)
+            {
+                if (HttpContext.Session.GetString("lvl") == "HR" || HttpContext.Session.GetString("lvl") == "JobSeeker")
+                {
+                    return View();
+                }
+                return Redirect("/");
+            }
+            return RedirectToAction("Login", "Accounts");
         }
 
         public IActionResult InsertOrUpdate(JobSeekerVM jobSeekerVM)

@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using JobRegistrationSubmisson.ViewModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -18,8 +19,16 @@ namespace WebClient.Controllers
         };
 
         public IActionResult Index()
-        {
-            return View("~/Views/Employees/Index.cshtml");
+        {          
+            if (HttpContext.Session.IsAvailable)
+            {
+                if (HttpContext.Session.GetString("lvl") == "HR")
+                {
+                    return View("~/Views/Employees/Index.cshtml");
+                }
+                return Redirect("/");
+            }
+            return RedirectToAction("Login", "Accounts");
         }
 
         public IActionResult LoadJobSeeker()
