@@ -40,7 +40,7 @@ namespace JobRegistrationSubmisson.Controllers
         {
             List<JobSeekerVM> list = new List<JobSeekerVM>();
             //var user = new UserVM();
-            var getData = await _context.JobSeekerLists.Include("JobSeeker").Include("Joblist").Where(Q => Q.JobSeeker.Reject == false).ToListAsync();
+            var getData = await _context.JobSeekerLists.Include("JobSeeker").Include("Joblist").Where(Q => Q.JobSeeker.Reject == false && Q.JobSeeker.Approve == false).ToListAsync();
             //var getuser = await _context.Users.Include("JobSeeker").Include("JobSeekerList").Include("Joblist").Where(Q => Q.JobSeeker.Reject == false).ToListAsync();
 
             //var conget = new List<string>().Concat(getData).concat(getuser)

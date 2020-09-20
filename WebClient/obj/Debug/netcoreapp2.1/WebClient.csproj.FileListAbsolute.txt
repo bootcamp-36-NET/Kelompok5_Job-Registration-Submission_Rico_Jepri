@@ -41,3 +41,4 @@ C:\Users\Jepri\Documents\Visual Studio 2017\Projects\JobRegistrationSubmisson\We
 C:\Users\Jepri\Documents\Visual Studio 2017\Projects\JobRegistrationSubmisson\WebClient\obj\Debug\netcoreapp2.1\WebClient.csproj.CopyComplete
 C:\Users\Jepri\Documents\Visual Studio 2017\Projects\JobRegistrationSubmisson\WebClient\obj\Debug\netcoreapp2.1\WebClient.dll
 C:\Users\Jepri\Documents\Visual Studio 2017\Projects\JobRegistrationSubmisson\WebClient\obj\Debug\netcoreapp2.1\WebClient.pdb
+C:\Users\Jepri\Documents\Visual Studio 2017\Projects\JobRegistrationSubmisson\WebClient\obj\Debug\netcoreapp2.1\Razor\Views\Dashboard\Notfound.g.cshtml.cs

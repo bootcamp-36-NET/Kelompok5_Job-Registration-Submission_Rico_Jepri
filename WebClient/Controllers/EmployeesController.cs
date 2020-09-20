@@ -29,9 +29,9 @@ namespace WebClient.Controllers
                 {
                     return View("~/Views/Employees/Index.cshtml");
                 }
-                return Redirect("/");
+                return Redirect("/Error");
             }
-            return RedirectToAction("Login", "Accounts");
+            return Redirect("/Error");
         }
 
         public IActionResult LoadJobSeeker()

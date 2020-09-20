@@ -26,9 +26,9 @@ namespace WebClient.Controllers
                 {
                     return View("~/Views/Joblists/ManageJoblist.cshtml");
                 }
-                return Redirect("/");
+                return Redirect("/Error");
             }
-            return RedirectToAction("Login", "Accounts");
+            return Redirect("/Error");
             
         }
 

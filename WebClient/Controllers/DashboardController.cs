@@ -32,7 +32,7 @@ namespace WebClient.Controllers
                 }
                 return Redirect("/profile");
             }
-            return RedirectToAction("Login", "Accounts");
+            return Redirect("/Error");
         }
 
         
@@ -47,7 +47,13 @@ namespace WebClient.Controllers
                 }
                 return Redirect("/");
             }
-            return RedirectToAction("Login", "Accounts");
+            return Redirect("/Error");
+        }
+
+        [Route("Error")]
+        public IActionResult Notfound()
+        {
+            return View();
         }
 
         public IActionResult InsertOrUpdate(JobSeekerVM jobSeekerVM)
