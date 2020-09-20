@@ -57,7 +57,7 @@ function Update() {
     Jobs.technical_Skill = $('#TechnicalSkill').val();
     Jobs.experience = $('#Experience').val();
     Jobs.achievement = $('#Achievement').val();
-    Jobs.joblistId = $('#JoblistOption').val();
+    //Jobs.joblistId = $('#JoblistOption').val();
     $.ajax({
         type: 'POST',
         url: "/DashBoard/InsertOrUpdate/",
@@ -83,30 +83,30 @@ function Update() {
 }
 
 
-function Loadlist(element) {
-    //debugger;
-    if (arrList.length === 0) {
-        $.ajax({
-            type: "Get",
-            url: "/joblists/LoadJoblist",
-            success: function (data) {
-                arrList = data;
-                renderList(element);
-            }
-        });
-    }
-    else {
-        renderList(element);
-    }
-}
+//function Loadlist(element) {
+//    //debugger;
+//    if (arrList.length === 0) {
+//        $.ajax({
+//            type: "Get",
+//            url: "/joblists/LoadJoblist",
+//            success: function (data) {
+//                arrList = data;
+//                renderList(element);
+//            }
+//        });
+//    }
+//    else {
+//        renderList(element);
+//    }
+//}
 
-function renderList(element) {
-    var $option = $(element);
-    $option.empty();
-    $option.append($('<option/>').val('0').text('Select List').hide());
-    $.each(arrList, function (i, val) {
-        $option.append($('<option/>').val(val.id).text(val.name))
-    });
-}
+//function renderList(element) {
+//    var $option = $(element);
+//    $option.empty();
+//    $option.append($('<option/>').val('0').text('Select List').hide());
+//    $.each(arrList, function (i, val) {
+//        $option.append($('<option/>').val(val.id).text(val.name))
+//    });
+//}
 
-Loadlist($('#JoblistOption'))
+//Loadlist($('#JoblistOption'))

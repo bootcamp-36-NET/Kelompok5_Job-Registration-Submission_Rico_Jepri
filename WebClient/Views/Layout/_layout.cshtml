@@ -89,7 +89,7 @@
         <!-- START SIDEBAR-->
         <nav class="page-sidebar" id="sidebar">
             <div id="sidebar-collapse">
-   
+
                 <div class="admin-block d-flex">
                     <div>
                         <img src="~/html/dist/assets/img/admin-avatar.png" width="45" />
@@ -99,34 +99,64 @@
                         <div class="admin-info">
                             <div class="font-strong">@Context.Session.GetString("uname")</div><small>@Context.Session.GetString("lvl")</small>
                         </div>
-                    } 
-                    @if(level == null)
+                    }
+                    @if (level == null)
                     {
                         <div class="admin-info">
                             <div class="font-strong">WELCOME TO</div><small><small>Job Registration Submisson</small></small>
                         </div>
                     }
-                    </div>
+                </div>
 
                 <ul class="side-menu metismenu">
-                    <li>
+                    @if (level == "HR")
+                    {
+                        <li>
+                            <a href="/charts">
+                                <i class="sidebar-item-icon fa fa-th-large"></i>
+                                <span class="nav-label">Dashboard</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="/">
+                                <i class="sidebar-item-icon fa fa-th-large"></i>
+                                <span class="nav-label">Dashboard</span>
+                            </a>
+                        </li>
+                    }
+
+                    @*<li>
                         <a href="/">
                             <i class="sidebar-item-icon fa fa-th-large"></i>
                             <span class="nav-label">Dashboard</span>
                         </a>
-                    </li>
+                    </li>*@
                     @if (level == "HR")
                     {
                         <li class="heading">FEATURES</li>
                         <li>
                             <a href="javascript:;">
-                                <i class="sidebar-item-icon fa fa-table"></i>
-                                <span class="nav-label">Tables</span><i class="fa fa-angle-left arrow"></i>
+                                <i class="sidebar-item-icon fa ti-clip"></i>
+                                <span class="nav-label">JobSeekers</span><i class="fa fa-angle-left arrow"></i>
                             </a>
-                            <ul class="nav-2-level collapse in">
+                            <ul class="nav-2-level collapse">
                                 <li>
-                                    <a href="/employees">Job Seeker Lits</a>
+                                    <a href="/employees">JobSeeker List</a>
                                 </li>
+                                <li>
+                                    <a href="/GetApprove">JobSeeker Approve</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="sidebar-item-icon fa fa-table"></i>
+                                <span class="nav-label">JobList</span><i class="fa fa-angle-left arrow"></i>
+                            </a>
+                            <ul class="nav-2-level collapse">
                                 <li>
                                     <a href="/managejoblist">Manage Job Lists</a>
                                 </li>
@@ -150,11 +180,11 @@
                     @*<li class="heading">PAGES</li>*@
 
                     @*<li>
-                            <a href="~/html/dist/calendar.html">
-                                <i class="sidebar-item-icon fa fa-calendar"></i>
-                                <span class="nav-label">Calendar</span>
-                            </a>
-                        </li>*@
+            <a href="~/html/dist/calendar.html">
+                <i class="sidebar-item-icon fa fa-calendar"></i>
+                <span class="nav-label">Calendar</span>
+            </a>
+        </li>*@
                 </ul>
             </div>
         </nav>
@@ -187,6 +217,7 @@
     <script src="~/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/js/jquery.dataTables.min.js"></script>
     <!-- PAGE LEVEL SCRIPTS-->
+    <script src="~/js/sweetalert2@9.js"></script>
     <script src="~/js/Script/Accounts.js"></script>
     @RenderSection("Scripts", required: false)
 </body>

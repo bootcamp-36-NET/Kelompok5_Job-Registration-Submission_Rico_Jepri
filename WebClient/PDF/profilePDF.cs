@@ -1,6 +1,5 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
-using JobRegistrationSubmisson.Models;
 using JobRegistrationSubmisson.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -10,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace WebClient.PDF
 {
-    public class cvPDF
+    public class profilePDF
     {
         #region Declaration
-        int _totalColumn = 3; //check
+        int _totalColumn = 2; //check
         Document _document;
         Font _fontSylye;
-        PdfPTable _pdfTable = new PdfPTable(3); //check
+        PdfPTable _pdfTable = new PdfPTable(2); //check
         PdfPCell _pdfPCell;
         MemoryStream _memoryStream = new MemoryStream();
         List<JobSeekerVM> _forms = new List<JobSeekerVM>();
-       
+
         #endregion
 
         public byte[] Prepare(List<JobSeekerVM> JobSeekers)
@@ -43,7 +42,7 @@ namespace WebClient.PDF
             //    var ach = form.Achievement;
             //}
 
-                #region
+            #region
             _document = new Document(PageSize.A4, 0f, 0f, 0f, 0f);
             _document.SetPageSize(PageSize.A4);
             _document.SetMargins(20f, 20f, 20f, 20f);
@@ -94,17 +93,17 @@ namespace WebClient.PDF
             #region Table header1
             _fontSylye = FontFactory.GetFont("Tahoma", 8f, 1);
 
-            _pdfPCell = new PdfPCell(new Phrase("No", _fontSylye));
-            _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
-            _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-            _pdfPCell.BackgroundColor = BaseColor.LIGHT_GRAY;
-            //_pdfPCell.Border = 0;
+            //_pdfPCell = new PdfPCell(new Phrase("No", _fontSylye));
+            //_pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            //_pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            //_pdfPCell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            ////_pdfPCell.Border = 0;
 
-            //_pdfPCell.Colspan = 1;
+            ////_pdfPCell.Colspan = 1;
 
-            //_pdfPCell.Border = 0;
+            ////_pdfPCell.Border = 0;
 
-            _pdfTable.AddCell(_pdfPCell);
+            //_pdfTable.AddCell(_pdfPCell);
 
             //_pdfPCell = new PdfPCell(new Phrase("ID", _fontSylye));
             //_pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
@@ -116,7 +115,7 @@ namespace WebClient.PDF
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             _pdfPCell.BackgroundColor = BaseColor.LIGHT_GRAY;
-            //_pdfPCell.Border = 0;
+            _pdfPCell.Border = 0;
 
             _pdfTable.AddCell(_pdfPCell);
 
@@ -150,16 +149,16 @@ namespace WebClient.PDF
                 _pdfTable.AddCell(_pdfPCell);
 
                 _pdfPCell = new PdfPCell(new Phrase(form.Name, _fontSylye));
-               // _pdfPCell.Border = 0;
+                // _pdfPCell.Border = 0;
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
                 //_pdfPCell.Border = 0;
-                
+
                 _pdfTable.AddCell(_pdfPCell);
 
                 _pdfPCell = new PdfPCell(new Phrase(form.JoblistName, _fontSylye));
-               // _pdfPCell.Border = 0;
+                // _pdfPCell.Border = 0;
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
@@ -194,56 +193,5 @@ namespace WebClient.PDF
             _pdfTable.CompleteRow();
             #endregion
         }
-
-        //private PdfPTable JobSInfo()
-        //{
-        //    PdfPTable pdfPTable = new PdfPTable(1);
-        //    pdfPTable.SetWidths(new float[] { 100f, 100f });
-
-        //    _pdfPCell = new PdfPCell(new Phrase("Name", _fontSylye));
-        //    _pdfPCell.Colspan = 1;
-        //    _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
-        //    _pdfPCell.Border = 0;
-        //    _pdfPCell.BackgroundColor = BaseColor.WHITE;
-        //    _pdfTable.AddCell(_pdfPCell);
-
-        //    foreach (JobSeekerVM form in _forms)
-        //    {
-        //        //_pdfPCell = new PdfPCell(new Phrase(number++.ToString(), _fontSylye));
-        //        //_pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
-        //        //_pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-        //        //_pdfPCell.BackgroundColor = BaseColor.WHITE;
-        //        //_pdfTable.AddCell(_pdfPCell);
-
-        //        //_pdfPCell = new PdfPCell(new Phrase(form.Id.ToString(), _fontSylye));
-        //        //_pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
-        //        //_pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-        //        //_pdfPCell.BackgroundColor = BaseColor.WHITE;
-        //        //_pdfTable.AddCell(_pdfPCell);
-
-        //        _pdfPCell = new PdfPCell(new Phrase(form.Name, _fontSylye));
-        //        _pdfPCell.Border = 0;
-        //        _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
-        //        _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-        //        _pdfPCell.BackgroundColor = BaseColor.WHITE;
-        //        _pdfTable.AddCell(_pdfPCell);
-
-        //        //_pdfPCell = new PdfPCell(new Phrase(form.CreateData.ToString(), _fontSylye));
-        //        //_pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
-        //        //_pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-        //        //_pdfPCell.BackgroundColor = BaseColor.WHITE;
-        //        //_pdfTable.AddCell(_pdfPCell);
-
-        //        //_pdfPCell = new PdfPCell(new Phrase(form.UpdateDate.ToString(), _fontSylye));
-        //        //_pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
-        //        //_pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-        //        //_pdfPCell.BackgroundColor = BaseColor.WHITE;
-        //        //_pdfTable.AddCell(_pdfPCell);
-
-        //    }
-        //    _pdfTable.CompleteRow();
-
-        //    return _pdfTable;
-        //}
     }
 }

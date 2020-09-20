@@ -3,13 +3,13 @@ var nb = 0;
 
 $(document).ready(function () {
     debugger;
-    table = $('#Jobseeker').DataTable({
+    table = $('#GetApprove').DataTable({
         "processing": true,
         "responsive": true,
         "pagination": true,
         "stateSave": true,
         "ajax": {
-            url: "/employees/LoadJobSeeker",
+            url: "/employees/LoadApprove",
             type: "GET",
             dataType: "json",
             dataSrc: "",
@@ -25,17 +25,17 @@ $(document).ready(function () {
             { "data": "name" },
             { "data": "joblistName" },
             //{ "data": "phone" },
-            //{
-            //    "data": "createData",
-            //    'render': function (jsonDate) {
-            //        //debugger;
-            //        var date = new Date(jsonDate);
-            //        if (date.getFullYear() != 0001) {
-            //            return moment(date).format('DD MMMM YYYY') + '<br> Time : ' + moment(date).format('HH:mm');
-            //        }
-            //        return "Not updated yet";
-            //    }
-            //},
+            {
+                "data": "registDate",
+                'render': function (jsonDate) {
+                    //debugger;
+                    var date = new Date(jsonDate);
+                    if (date.getFullYear() != 0001) {
+                        return moment(date).format('DD MMMM YYYY') + '<br> Time : ' + moment(date).format('HH:mm');
+                    }
+                    return "Not updated yet";
+                }
+            },
             {
                 "sortable": false,
                 "render": function (data, type, row, meta) {
@@ -45,10 +45,9 @@ $(document).ready(function () {
                 }
             }
         ],
-      
+
     });
 });
-
 
 
 function ClearScreen() {
@@ -66,7 +65,7 @@ function ClearScreen() {
     $('#TechnicalSkill').val('');
     $('#Experience').val('');
     $('#Achievement').val('');
-        //$('#add').hide();
+    //$('#add').hide();
     $('#update').hide();
     $('#add').show();
 }
@@ -100,69 +99,3 @@ function GetById(number) {
         $('#myModal').modal('show');
     })
 }
-
-
-function Approve() {
-    debugger;
-    var Acc = new Object();
-    Acc.Id = $('#Id').val();
-    Acc.Name = $('#Name').val();
-    $.ajax({
-        type: 'POST',
-        url: "employees/Approve/",
-        cache: false,
-        dataType: "JSON",
-        data: Acc
-    }).then((result) => {
-        //debugger;
-        if (result.statusCode == 200) {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Jobseeker Has Been Approved',
-                showConfirmButton: false,
-                timer: 1500,
-            });
-            table.ajax.reload(null, false);
-        } else {
-            Swal.fire('Error', 'Failed to Approved', 'error');
-            ClearScreen();
-        }
-    })
-}
-
-function Reject() {
-    debugger;
-    var Acc = new Object();
-    Acc.Id = $('#Id').val();
-    Acc.Name = $('#Name').val();
-    $.ajax({
-        type: 'POST',
-        url: "employees/Reject/",
-        cache: false,
-        dataType: "JSON",
-        data: Acc
-    }).then((result) => {
-        //debugger;
-        if (result.statusCode == 200) {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Jobseeker Has Been Rejecct',
-                showConfirmButton: false,
-                timer: 1500,
-            });
-            table.ajax.reload(null, false);
-        } else {
-            Swal.fire('Error', 'Failed to Reject', 'error');
-            ClearScreen();
-        }
-    })
-}
-
-
-
-
-
-
-

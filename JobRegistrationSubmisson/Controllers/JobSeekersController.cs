@@ -92,6 +92,35 @@ namespace JobRegistrationSubmisson.Controllers
             return list;
         }
 
+
+        [HttpGet]
+        [Route("GetApprove")]
+        public async Task<List<JobSeekerVM>> GetApprove()
+        {
+            List<JobSeekerVM> list = new List<JobSeekerVM>();
+            var getData = await _context.JobSeekerLists.Include("JobSeeker").Include("Joblist").Where(Q => Q.JobSeeker.Approve == true).ToListAsync();
+
+            if (getData.Count == 0)
+            {
+                return null;
+            }
+            foreach (var item in getData)
+            {
+                var user = new JobSeekerVM()
+                {
+                    JobSId = item.JobSeeker.JobSId,
+                    Name = item.JobSeeker.Name,
+                    Address = item.JobSeeker.Address,
+                    JoblistName = item.Joblist.Name,
+                    RegistDate = item.JobSeeker.RegistDate
+
+
+                };
+                list.Add(user);
+            }
+            return list;
+        }
+
         //[Authorize]
 
         [HttpPost]

@@ -34,12 +34,50 @@ namespace WebClient.Controllers
             return Redirect("/Error");
         }
 
+        [Route("GetApprove")]
+        public IActionResult GetApprove()
+        {
+            if (HttpContext.Session.IsAvailable)
+            {
+                if (HttpContext.Session.GetString("lvl") == "HR")
+                {
+                    return View("~/Views/Employees/Approve.cshtml");
+                }
+                return Redirect("/Error");
+            }
+            return Redirect("/Error");
+        }
+
         public IActionResult LoadJobSeeker()
         {
             IEnumerable<JobSeekerVM> emp = null;
             //var token = HttpContext.Session.GetString("token");
             //client.DefaultRequestHeaders.Add("Authorization", token);
             var resTask = client.GetAsync("jobseekers");
+            resTask.Wait();
+
+            var result = resTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<List<JobSeekerVM>>();
+                readTask.Wait();
+                emp = readTask.Result;
+            }
+            else
+            {
+                emp = Enumerable.Empty<JobSeekerVM>();
+                ModelState.AddModelError(string.Empty, "Server Error try after sometimes.");
+            }
+            return Json(emp);
+
+        }
+
+        public IActionResult LoadApprove()
+        {
+            IEnumerable<JobSeekerVM> emp = null;
+            //var token = HttpContext.Session.GetString("token");
+            //client.DefaultRequestHeaders.Add("Authorization", token);
+            var resTask = client.GetAsync("jobseekers/getapprove");
             resTask.Wait();
 
             var result = resTask.Result;

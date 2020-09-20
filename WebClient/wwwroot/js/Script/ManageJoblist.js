@@ -103,7 +103,7 @@ function Save() {
                 title: 'Data inserted Successfully',
                 showConfirmButton: false,
                 timer: 1500,
-            })
+            });
             table.ajax.reload(null, false);
         } else {
             Swal.fire('Error', 'Failed to Input', 'error');
@@ -141,113 +141,6 @@ function Update() {
     })
 }
 
-function Delete(id) {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!',
-    }).then((resultSwal) => {
-        if (resultSwal.value) {
-            //debugger;
-            $.ajax({
-                url: "/Departments/Delete/",
-                data: { id: id }
-            }).then((result) => {
-                //debugger;
-                if (result.statusCode == 200) {
-                    //debugger;
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'Delete Successfully',
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
-                    table.ajax.reload(null, false);
-                } else {
-                    Swal.fire('Error', 'Failed to Delete', 'error');
-                    ClearScreen();
-                }
-            })
-        };
-    });
-}
-
-function GetById(id) {
-    debugger;
-    $.ajax({
-        url: "/ManageJoblist/GetById/",
-        data: { id: id }
-    }).then((result) => {
-        debugger;
-        $('#Id').val(result.id);
-        $('#Name').val(result.name);
-        $('#add').hide();
-        $('#update').show();
-        $('#myModal').modal('show');
-    })
-}
-
-function Save() {
-    //debugger;
-    var list = new Object();
-    list.Id = 0;
-    list.Name = $('#Name').val();
-    $.ajax({
-        type: 'POST',
-        url: "/ManageJoblist/InsertOrUpdate/",
-        cache: false,
-        dataType: "JSON",
-        data: list
-    }).then((result) => {
-        //debugger;
-        if (result.statusCode == 200) {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Data inserted Successfully',
-                showConfirmButton: false,
-                timer: 1500,
-            })
-            table.ajax.reload(null, false);
-        } else {
-            Swal.fire('Error', 'Failed to Input', 'error');
-            ClearScreen();
-        }
-    })
-}
-
-function Update() {
-    //debugger;
-    var list = new Object();
-    list.Id = $('#Id').val();
-    list.Name = $('#Name').val();
-    $.ajax({
-        type: 'POST',
-        url: "/ManageJoblist/InsertOrUpdate/",
-        cache: false,
-        dataType: "JSON",
-        data: list
-    }).then((result) => {
-        //debugger;
-        if (result.statusCode == 200) {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Data Updated Successfully',
-                showConfirmButton: false,
-                timer: 1500,
-            });
-            table.ajax.reload(null, false);
-        } else {
-            Swal.fire('Error', 'Failed to Input', 'error');
-            ClearScreen();
-        }
-    })
-}
 
 function Delete(id) {
     Swal.fire({
@@ -283,3 +176,112 @@ function Delete(id) {
         };
     });
 }
+
+//function Delete(id) {
+//    Swal.fire({
+//        title: 'Are you sure?',
+//        text: "You won't be able to revert this!",
+//        showCancelButton: true,
+//        confirmButtonColor: '#3085d6',
+//        cancelButtonColor: '#d33',
+//        confirmButtonText: 'Yes, delete it!',
+//    }).then((resultSwal) => {
+//        if (resultSwal.value) {
+//            //debugger;
+//            $.ajax({
+//                url: "/Departments/Delete/",
+//                data: { id: id }
+//            }).then((result) => {
+//                //debugger;
+//                if (result.statusCode == 200) {
+//                    //debugger;
+//                    Swal.fire({
+//                        position: 'center',
+//                        icon: 'success',
+//                        title: 'Delete Successfully',
+//                        showConfirmButton: false,
+//                        timer: 1500,
+//                    });
+//                    table.ajax.reload(null, false);
+//                } else {
+//                    Swal.fire('Error', 'Failed to Delete', 'error');
+//                    ClearScreen();
+//                }
+//            })
+//        };
+//    });
+//}
+
+//function GetById(id) {
+//    debugger;
+//    $.ajax({
+//        url: "/ManageJoblist/GetById/",
+//        data: { id: id }
+//    }).then((result) => {
+//        debugger;
+//        $('#Id').val(result.id);
+//        $('#Name').val(result.name);
+//        $('#add').hide();
+//        $('#update').show();
+//        $('#myModal').modal('show');
+//    })
+//}
+
+//function Save() {
+//    //debugger;
+//    var list = new Object();
+//    list.Id = 0;
+//    list.Name = $('#Name').val();
+//    $.ajax({
+//        type: 'POST',
+//        url: "/ManageJoblist/InsertOrUpdate/",
+//        cache: false,
+//        dataType: "JSON",
+//        data: list
+//    }).then((result) => {
+//        //debugger;
+//        if (result.statusCode == 200) {
+//            Swal.fire({
+//                position: 'center',
+//                icon: 'success',
+//                title: 'Data inserted Successfully',
+//                showConfirmButton: false,
+//                timer: 1500,
+//            })
+//            table.ajax.reload(null, false);
+//        } else {
+//            Swal.fire('Error', 'Failed to Input', 'error');
+//            ClearScreen();
+//        }
+//    })
+//}
+
+//function Update() {
+//    //debugger;
+//    var list = new Object();
+//    list.Id = $('#Id').val();
+//    list.Name = $('#Name').val();
+//    $.ajax({
+//        type: 'POST',
+//        url: "/ManageJoblist/InsertOrUpdate/",
+//        cache: false,
+//        dataType: "JSON",
+//        data: list
+//    }).then((result) => {
+//        //debugger;
+//        if (result.statusCode == 200) {
+//            Swal.fire({
+//                position: 'center',
+//                icon: 'success',
+//                title: 'Data Updated Successfully',
+//                showConfirmButton: false,
+//                timer: 1500,
+//            });
+//            table.ajax.reload(null, false);
+//        } else {
+//            Swal.fire('Error', 'Failed to Input', 'error');
+//            ClearScreen();
+//        }
+//    })
+//}
+
